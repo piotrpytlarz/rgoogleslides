@@ -624,8 +624,8 @@ add_insert_bullets_request <- function(google_slides_request = NULL, shape_id, b
   if(is.null(google_slides_request)){
     google_slides_request <- google_slide_request_container$new()
   }
-  if(is.null(bullets_type)){
-    bullets_type <- "BULLET_DIAMOND_CIRCLE_SQUARE"
+  if(is.null(bullets_pattern)){
+    bullets_pattern <- "BULLET_DIAMOND_CIRCLE_SQUARE"
   }
   assert_that(is.google_slide_request(google_slides_request))
   assert_that(is.string(shape_id))
