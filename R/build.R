@@ -606,7 +606,7 @@ add_insert_bullets_request <- function(google_slides_request = NULL, shape_id){
   assert_that(is.string(shape_id))
   insert_bullets_request <- list(createParagraphBullets = list(objectId = shape_id,
                                                                textRange = list(type = "ALL"),
-                                                               bulletPreset: 'BULLET_ARROW_DIAMOND_DISC'))
+                                                               bulletPreset = 'BULLET_ARROW_DIAMOND_DISC'))
 
   google_slides_request$add_request(insert_bullets_request)
   return(google_slides_request)
