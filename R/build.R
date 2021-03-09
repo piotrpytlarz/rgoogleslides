@@ -596,18 +596,44 @@ add_replace_all_shapes_with_image_request <- function(google_slides_request = NU
 
 
 #' Create bullets
+#' @param google_slides_request (Optional) A Google Slides Request object which is used to manage requests to the API
+#' @param shape_id The ID of the object where the paragraph text is to be replaced with bullets
+#' @param bullets_pattern (Optional) A character vector specifying bullet glyph pattern:
+#' \itemize{
+#'  \item BULLET_GLYPH_PRESET_UNSPECIFIED 	The bullet glyph preset is unspecified.
+#'  \item BULLET_DISC_CIRCLE_SQUARE 	A bulleted list with a DISC , CIRCLE and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_DIAMONDX_ARROW3D_SQUARE 	A bulleted list with a DIAMONDX , ARROW3D and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_CHECKBOX 	A bulleted list with CHECKBOX bullet glyphs for all list nesting levels.
+#'  \item BULLET_ARROW_DIAMOND_DISC 	A bulleted list with a ARROW , DIAMOND and DISC bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_STAR_CIRCLE_SQUARE 	A bulleted list with a STAR , CIRCLE and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_ARROW3D_CIRCLE_SQUARE 	A bulleted list with a ARROW3D , CIRCLE and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_LEFTTRIANGLE_DIAMOND_DISC 	A bulleted list with a LEFTTRIANGLE , DIAMOND and DISC bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_DIAMONDX_HOLLOWDIAMOND_SQUARE 	A bulleted list with a DIAMONDX , HOLLOWDIAMOND and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item BULLET_DIAMOND_CIRCLE_SQUARE 	A bulleted list with a DIAMOND , CIRCLE and SQUARE bullet glyph for the first 3 list nesting levels.
+#'  \item NUMBERED_DECIMAL_ALPHA_ROMAN 	A numbered list with DECIMAL , ALPHA and ROMAN numeric glyphs for the first 3 list nesting levels, followed by periods.
+#'  \item NUMBERED_DECIMAL_ALPHA_ROMAN_PARENS 	A numbered list with DECIMAL , ALPHA and ROMAN numeric glyphs for the first 3 list nesting levels, followed by parenthesis.
+#'  \item NUMBERED_DECIMAL_NESTED 	A numbered list with DECIMAL numeric glyphs separated by periods, where each nesting level uses the previous nesting level's glyph as a prefix. For example: '1.', '1.1.', '2.', '2.2.'.
+#'  \item NUMBERED_UPPERALPHA_ALPHA_ROMAN 	A numbered list with UPPERALPHA , ALPHA and ROMAN numeric glyphs for the first 3 list nesting levels, followed by periods.
+#'  \item NUMBERED_UPPERROMAN_UPPERALPHA_DECIMAL 	A numbered list with UPPERROMAN , UPPERALPHA and DECIMAL numeric glyphs for the first 3 list nesting levels, followed by periods.
+#'  \item NUMBERED_ZERODECIMAL_ALPHA_ROMAN A numbered list with ZERODECIMAL , ALPHA and ROMAN numeric glyphs for the first 3 list nesting levels, followed by periods.
+#' }
+#' The default value for this parameter is BULLET_DIAMOND_CIRCLE_SQUARE
+#' @importFrom assertthat assert_that is.string
 #' @export
-add_insert_bullets_request <- function(google_slides_request = NULL, shape_id){
+add_insert_bullets_request <- function(google_slides_request = NULL, shape_id, bullets_type = NULL){
   if(is.null(google_slides_request)){
     google_slides_request <- google_slide_request_container$new()
   }
-
+  if(is.null(bullets_type)){
+    bullets_type <- "BULLET_DIAMOND_CIRCLE_SQUARE"
+  }
   assert_that(is.google_slide_request(google_slides_request))
   assert_that(is.string(shape_id))
   insert_bullets_request <- list(createParagraphBullets = list(objectId = shape_id,
                                                                textRange = list(type = "ALL"),
-                                                               bulletPreset = 'BULLET_ARROW_DIAMOND_DISC'))
+                                                               bulletPreset = bullets_pattern))
 
   google_slides_request$add_request(insert_bullets_request)
   return(google_slides_request)
 }
+
