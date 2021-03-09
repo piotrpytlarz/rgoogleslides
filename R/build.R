@@ -620,7 +620,7 @@ add_replace_all_shapes_with_image_request <- function(google_slides_request = NU
 #' The default value for this parameter is BULLET_DIAMOND_CIRCLE_SQUARE
 #' @importFrom assertthat assert_that is.string
 #' @export
-add_insert_bullets_request <- function(google_slides_request = NULL, shape_id, bullets_type = NULL){
+add_insert_bullets_request <- function(google_slides_request = NULL, shape_id, bullets_pattern = NULL){
   if(is.null(google_slides_request)){
     google_slides_request <- google_slide_request_container$new()
   }
