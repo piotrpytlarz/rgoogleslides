@@ -603,11 +603,7 @@ add_insert_bullets_request <- function(google_slides_request = NULL, shape_id){
   }
 
   assert_that(is.google_slide_request(google_slides_request))
-  assert_that(is.string(object_id))
-  assert_that(is.number(row_index) | is.null(row_index))
-  assert_that(is.number(column_index) | is.null(column_index))
-  assert_that(is.string(text))
-
+  assert_that(is.string(slide_id))
   insert_bullets_request <- list(createParagraphBullets = list(objectId = shape_id,
                                                                textRange = list(type = "ALL"),
                                                                bulletPreset: 'BULLET_ARROW_DIAMOND_DISC'))
