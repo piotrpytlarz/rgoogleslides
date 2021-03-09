@@ -7,7 +7,7 @@
 add_insert_bullets_request(
   google_slides_request = NULL,
   shape_id,
-  bullets_type = NULL
+  bullets_pattern = NULL
 )
 }
 \arguments{
